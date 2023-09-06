@@ -62,6 +62,77 @@ def rec_fib(n)
     rec_fib(n-1) + rec_fib(n-2)
 end
 
+def bsearch(array, target)
+    return nil if array.empty?
+    if array.length == 1
+        return 1 if array[0] == target
+        return nil if array[0] != target
+    end
+    mid = (array.length/2).floor()
+    # p mid
+    if target == array[mid]
+        return mid
+    elsif target > array[mid]
+        res = bsearch(array[mid+1..-1], target)
+        return res + 1 + mid
+    elsif target < array[mid]
+        res = bsearch(array[0..mid-1], target)
+        return res + mid 
+    end
+end
+
+# p (3/2.floor())
+# p bsearch([1,2,3,4,5,6,7], 7)
+
+def merge_sort(array)
+    p "==========================="
+    return [] if array.empty?
+    return array if array.length==1
+    mid = (array.length/2).floor()
+    left_a = array[0...mid]
+    right_a = array[mid..-1]
+    arr = [left_a, right_a]
+    temp = []
+    arr.each do |sub_array|
+        temp << merge_sort(sub_array)
+    end
+    p "temp: #{temp}"
+    master = []
+    temp.each_with_index do |el, i|
+        tempo = []
+        p "looping"
+        if i.even?
+            p el[0]
+            p temp[i+1][0]
+            if el[0] < temp[i+1][0]
+                tempo << el
+                tempo << temp[i+1]
+            else
+                tempo << temp[i+1]
+                tempo << el
+            end
+        end
+        master << tempo
+    end
+
+    p "master: #{master} "
 
 
-p rec_fib(5)
+
+end
+
+p merge_sort([2,1,4,3])
+
+
+
+def subsets(array)
+    return [] if array.empty?
+    temp = []
+    
+    
+end
+
+
+
+
+
