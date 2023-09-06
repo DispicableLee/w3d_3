@@ -24,8 +24,8 @@ end
 
 # def exponentiation_vers_2(a, b)
 #     return 1 if b == 0
-#     return a if b == 1  
-#     b.times do 
+#     return a if b == 1
+#     b.times do
 #         return a*exponentiation_vers_2(a, b-1)
 #     end
 # end
@@ -50,7 +50,7 @@ end
 def it_fib(n)
     fibo = [0,1,1]
     return fibo[n-1] if n <=3
-    n.times do 
+    n.times do
         fibo << fibo[-1] + fibo[-2]
     end
     fibo[n-1]
@@ -77,7 +77,7 @@ def bsearch(array, target)
         return res + 1 + mid
     elsif target < array[mid]
         res = bsearch(array[0..mid-1], target)
-        return res + mid 
+        return res + mid
     end
 end
 
@@ -85,54 +85,39 @@ end
 # p bsearch([1,2,3,4,5,6,7], 7)
 
 def merge_sort(array)
-    p "==========================="
     return [] if array.empty?
     return array if array.length==1
+
     mid = (array.length/2).floor()
     left_a = array[0...mid]
     right_a = array[mid..-1]
     arr = [left_a, right_a]
+
     temp = []
     arr.each do |sub_array|
+        puts "looping"
         temp << merge_sort(sub_array)
     end
-    p "temp: #{temp}"
+    temp = temp.flatten
     master = []
     temp.each_with_index do |el, i|
         tempo = []
-        p "looping"
         if i.even?
-            p el[0]
-            p temp[i+1][0]
-            if el[0] < temp[i+1][0]
+            if el < temp[i+1]
                 tempo << el
                 tempo << temp[i+1]
             else
                 tempo << temp[i+1]
                 tempo << el
             end
+            master << tempo
+        elsif i == arr.length-1
+            tempo << temp[i]
         end
-        master << tempo
     end
 
-    p "master: #{master} "
-
-
+    puts "master: #{master.flatten} "
 
 end
 
-p merge_sort([2,1,4,3])
-
-
-
-def subsets(array)
-    return [] if array.empty?
-    temp = []
-    
-    
-end
-
-
-
-
-
+merge_sort([2,1,4,3])
